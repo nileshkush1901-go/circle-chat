@@ -52,8 +52,8 @@
   align-items: center;
   gap: 16px;
   padding: 12px 16px;
-  border: 1px solid #e2def4;
-  background: #ffffffaa;
+  border: 1px solid var(--border);
+  background: var(--surface-glass);
   border-radius: 12px;
 }
 .preview-rooms > div:nth-child(2) {
@@ -78,7 +78,7 @@
   margin-top: 35px;
 }
 .entry-card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: 0 20px 70px #26203e09;
   padding: 40px;
@@ -97,7 +97,7 @@
   display: flex;
   gap: 3px;
   padding: 4px;
-  background: #f3f3f8;
+  background: var(--surface-muted);
   border-radius: 10px;
   margin: 25px 0;
 }
@@ -109,7 +109,7 @@
   color: var(--muted);
 }
 .segmented button.selected {
-  background: white;
+  background: var(--surface);
   color: var(--purple);
   box-shadow: 0 2px 6px #2426350a;
   font-weight: 650;

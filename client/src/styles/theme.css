@@ -1,0 +1,57 @@
+:root {
+  color-scheme: light;
+  --page: #f6f7fb;
+  --surface: #fff;
+  --surface-glass: #ffffffaa;
+  --surface-muted: #f3f3f8;
+  --text: #242635;
+  --text-secondary: #525567;
+  --purple: #6750e8;
+  --action: #6750e8;
+  --muted: #757889;
+  --border: #e8e9f1;
+  --accent-soft: #eeebff;
+  --error-surface: #fff0f3;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #12141d;
+  --surface: #1b1e2b;
+  --surface-glass: #1b1e2bdd;
+  --surface-muted: #252939;
+  --text: #edf0fa;
+  --text-secondary: #c0c6da;
+  --purple: #b3a5ff;
+  --action: #6750e8;
+  --muted: #a4acc3;
+  --border: #383e53;
+  --accent-soft: #302a4c;
+  --error-surface: #422333;
+}
+.topbar-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+:root[data-theme="dark"] .entry {
+  background: radial-gradient(ellipse at 15% 45%, #28233f 0, transparent 50%);
+}
+:root[data-theme="dark"] .random-card .outline {
+  color: var(--text-secondary);
+}
+:root[data-theme="dark"] .error {
+  color: #ffadc0;
+}
+/* Shared drawings keep their original white canvas and stroke colors. */
+:root[data-theme="dark"] .whiteboard {
+  background: white;
+  color-scheme: light;
+}
+@media (max-width: 430px) {
+  .topbar-actions {
+    gap: 0.5rem;
+  }
+  .entry-header > span {
+    display: none;
+  }
+}

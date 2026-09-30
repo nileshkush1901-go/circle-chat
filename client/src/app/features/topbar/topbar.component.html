@@ -18,8 +18,11 @@
               : "Discover"
       }}</span>
     </div>
-    <div class="connection" [class.offline]="!state.connected">
-      <i></i>{{ state.connected ? "Connected" : "Reconnecting…" }}
+    <div class="topbar-actions">
+      <app-theme-toggle />
+      <div class="connection" [class.offline]="!state.connected">
+        <i></i>{{ state.connected ? "Connected" : "Reconnecting…" }}
+      </div>
     </div>
   </header>
   @if (state.error) {

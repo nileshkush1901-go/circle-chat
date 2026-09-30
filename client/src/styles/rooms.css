@@ -37,7 +37,7 @@
 .search {
   display: flex;
   align-items: center;
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 9px;
   max-width: 440px;
@@ -73,13 +73,13 @@
   border: 1px solid transparent;
 }
 .chips button.selected {
-  background: #ece8ff;
+  background: var(--accent-soft);
   color: var(--purple);
-  border-color: #e1dafa;
+  border-color: var(--border);
   font-weight: 650;
 }
 .chips button:hover {
-  background: #eeedf7;
+  background: var(--surface-muted);
 }
 .room-grid {
   display: grid;
@@ -87,7 +87,7 @@
   gap: 18px;
 }
 .room-card {
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   padding: 22px;
   border-radius: 13px;
@@ -150,7 +150,7 @@
   padding: 5px 9px;
   border-radius: 5px;
   color: #9595a4;
-  background: #f7f7fb;
+  background: var(--surface-muted);
   display: inline-block;
 }
 .room-card h2 {
@@ -190,7 +190,7 @@
   align-items: center;
   gap: 20px;
   padding: 25px 28px;
-  background: #ede9fd;
+  background: var(--accent-soft);
   border: 1px solid #e5dffb;
   border-radius: 13px;
   margin-top: 28px;
@@ -202,7 +202,7 @@
 }
 .random-card h2 {
   font-size: 1rem;
-  color: #514375;
+  color: var(--text-secondary);
   margin: 0 0 7px;
 }
 .random-card p {
@@ -213,9 +213,9 @@
 .random-card .outline {
   margin-left: auto;
   font-size: 0.75rem;
-  color: #70618f;
-  background: #ffffff88;
-  border-color: #d9d0ee;
+  color: var(--text-secondary);
+  background: var(--surface-glass);
+  border-color: var(--border);
   padding: 11px 14px;
 }
 .subtle-footer {
@@ -242,7 +242,7 @@
   margin-bottom: 20px;
 }
 .conversation-list {
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 10px;

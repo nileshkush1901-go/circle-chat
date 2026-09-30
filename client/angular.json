@@ -13,14 +13,23 @@
             "index": "src/index.html",
             "tsConfig": "tsconfig.json",
             "styles": ["src/styles.css"],
-            "outputPath": "dist"
+            "outputPath": "dist",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ]
           },
           "configurations": {
             "production": {
               "outputHashing": "all",
               "optimization": {
                 "scripts": true,
-                "styles": { "minify": true, "inlineCritical": false },
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                },
                 "fonts": true
               },
               "budgets": [

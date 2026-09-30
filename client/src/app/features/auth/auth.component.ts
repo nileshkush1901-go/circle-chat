@@ -1,3 +1,4 @@
+import { ThemeToggleComponent } from "../../shared/components/theme-toggle/theme-toggle.component";
 import { observeState } from "../../core/state/observe-state";
 import { Component, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -7,7 +8,7 @@ import { SessionService } from "../session/session.service";
 @Component({
   selector: "app-auth",
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [ThemeToggleComponent, CommonModule, FormsModule],
   templateUrl: "./auth.component.html",
   styles: [":host { display: contents; }"],
 })

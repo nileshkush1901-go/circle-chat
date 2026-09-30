@@ -129,3 +129,13 @@ Free Render uploads are still ephemeral; use durable object storage for reliable
 media. Proxy trust, TURN hosting, backups, abuse controls, monitoring, and
 horizontal socket scaling require deployment-specific work. Browser regression
 coverage does not replace real-device voice/video and mobile layout testing.
+
+## Themes
+
+The shared theme toggle is used by the guest entry and authenticated header.
+ThemeService stores an explicit light/dark choice under `circle.theme` in local
+storage and syncs changes across tabs. The external `client/public/theme-init.js`
+script applies the saved choice before styles and Angular load; visitors without
+a saved choice use the system preference. Keep its storage key aligned with the
+service. Storage errors fall back to an in-memory choice. Palette tokens live in
+`client/src/styles/theme.css`; shared drawings retain a white canvas.

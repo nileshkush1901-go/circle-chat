@@ -6,13 +6,10 @@
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-  color: #242635;
-  background: #f6f7fb;
+  color: var(--text);
+  background: var(--page);
   font-synthesis: none;
   font-size: 16px;
-  --purple: #6750e8;
-  --muted: #757889;
-  --border: #e8e9f1;
 }
 * {
   box-sizing: border-box;
@@ -70,12 +67,12 @@ button {
 input,
 textarea,
 select {
-  border: 1px solid #dfe1eb;
+  border: 1px solid var(--border);
   border-radius: 9px;
-  background: white;
+  background: var(--surface);
   padding: 12px 14px;
   min-width: 0;
-  color: #242635;
+  color: var(--text);
   width: 100%;
   outline: none;
 }
@@ -117,7 +114,7 @@ input[type="checkbox"] {
     transform 0.15s;
 }
 .primary {
-  background: var(--purple);
+  background: var(--action);
   color: white;
   box-shadow: 0 4px 8px #6750e819;
 }
@@ -125,11 +122,11 @@ input[type="checkbox"] {
   background: #5840d5;
 }
 .outline {
-  border: 1px solid #dddfea;
-  background: white;
+  border: 1px solid var(--border);
+  background: var(--surface);
 }
 .outline:hover {
-  background: #f2efff;
+  background: var(--accent-soft);
   border-color: #c8befc;
 }
 .danger {
@@ -179,7 +176,7 @@ small {
   align-items: center;
   justify-content: center;
   color: white;
-  background: var(--purple);
+  background: var(--action);
   border-radius: 12px;
   font-weight: 800;
   letter-spacing: -2px;
