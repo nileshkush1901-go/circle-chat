@@ -1,0 +1,23 @@
+﻿services:
+  - type: web
+    name: circle-chat
+    runtime: node
+    plan: free
+    branch: main
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 24.14.1
+      - key: NODE_ENV
+        value: production
+      - key: MONGOMS_DISABLE_POSTINSTALL
+        value: "1"
+      - key: MONGODB_URI
+        sync: false
+      - key: APP_ORIGIN
+        fromService:
+          type: web
+          name: circle-chat
+          envVarKey: RENDER_EXTERNAL_URL
