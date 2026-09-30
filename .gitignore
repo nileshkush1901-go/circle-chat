@@ -1,0 +1,16 @@
+node_modules/
+client/dist/
+client/.angular/
+.env
+uploads/
+server/uploads/
+*.log
+coverage/
+
+# Local data and deployment credentials
+server/.local-mongodb/
+.env.*
+!.env.example
+.netlify/
+*.pem
+*.key
