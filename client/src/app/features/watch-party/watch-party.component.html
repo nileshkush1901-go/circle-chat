@@ -1,0 +1,42 @@
+@if (state.me && state.active) {
+  @if (state.activity === "watch") {
+    <section class="activity-panel">
+      <div class="activity-toolbar">
+        <strong>Watch together</strong
+        ><button
+          class="icon-button"
+          aria-label="Close watch together"
+          (click)="state.activity = ''"
+        >
+          ×
+        </button>
+      </div>
+      @if (state.watch) {
+        <video
+          appView="watchVideo"
+          [src]="'/api/uploads/' + state.watch.attachment"
+          playsinline
+          (loadedmetadata)="activities.syncWatch()"
+        ></video>
+      }
+      <div class="watch-controls">
+        <select aria-label="Choose shared video" [(ngModel)]="state.watchFile">
+          <option value="">Choose a video from this chat</option>
+          @for (m of state.videos; track m.id) {
+            <option [value]="m.attachment">
+              {{ state.media[m.attachment!]?.name }}
+            </option>
+          }</select
+        ><button class="primary" (click)="state.run(activities.watchControl(true))">
+          Play together</button
+        ><button class="outline" (click)="state.run(activities.watchControl(false))">
+          Pause
+        </button>
+      </div>
+      <p class="small">
+        Share an MP4 or WebM in this chat first. Playback follows the room’s play and
+        pause controls.
+      </p>
+    </section>
+  }
+}

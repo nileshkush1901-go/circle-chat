@@ -1,0 +1,79 @@
+@if (state.me) {
+  <aside class="sidebar" [class.mobile-open]="state.mobileMenu">
+    <a href="/" class="brand"
+      ><span class="brand-mark">c</span>circle<span class="brand-dot">.</span></a
+    >
+    <div class="workspace-label">YOUR LITTLE CORNER OF THE INTERNET</div>
+    <nav aria-label="Main navigation">
+      <button
+        [class.active]="state.view === 'rooms'"
+        (click)="state.view = 'rooms'; state.mobileMenu = false"
+      >
+        <span>▦</span>Discover rooms</button
+      ><button
+        [class.active]="state.view === 'messages'"
+        (click)="
+          state.view = 'messages';
+          state.run(rooms.loadConversations());
+          state.mobileMenu = false
+        "
+      >
+        <span>☏</span>Messages
+        <span class="nav-count">{{ state.conversations.length }}</span></button
+      ><button (click)="state.run(rooms.random()); state.mobileMenu = false">
+        <span>⤨</span>Meet someone new
+      </button>
+    </nav>
+    <div class="sidebar-heading">
+      YOUR ROOMS
+      <button
+        class="icon-button"
+        title="Create a room"
+        aria-label="Create a room"
+        (click)="state.modal = 'create'"
+      >
+        +
+      </button>
+    </div>
+    <div class="joined-rooms">
+      @for (room of state.rooms; track room.id) {
+        @if (room.members.includes(state.me.id)) {
+          <button
+            [class.active]="state.active?.id === room.id && state.view === 'chat'"
+            (click)="state.run(rooms.openRoom(room))"
+          >
+            <span class="hash">#</span>{{ room.name }}
+            @if (room.private) {
+              <span class="tiny-tag">Private</span>
+            }
+          </button>
+        }
+      }
+    </div>
+    <button class="outline create-sidebar" (click)="state.modal = 'create'">
+      + Create a room</button
+    ><button class="text-button" (click)="state.modal = 'invite'">
+      Have an invitation?
+    </button>
+    <div class="sidebar-bottom">
+      <div class="community-note">
+        <strong>Good chats start with kindness.</strong>
+        <p>Say hello. Listen. Give everyone room to be themselves.</p>
+      </div>
+      @if (state.me.role === "admin") {
+        <button class="text-button" (click)="state.run(moderation.admin())">
+          Moderation queue
+        </button>
+      }
+      <button class="self-profile" (click)="state.run(profile.settings())">
+        <span class="avatar" [style.background]="state.me.color">{{
+          state.initials(state.me.name)
+        }}</span
+        ><span
+          ><strong>{{ state.me.name }}</strong
+          ><small>{{ state.me.guest ? "Guest explorer" : "Member" }}</small></span
+        ><span class="settings-icon">⚙</span>
+      </button>
+    </div>
+  </aside>
+}

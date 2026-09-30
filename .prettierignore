@@ -1,0 +1,9 @@
+node_modules/
+client/dist/
+client/.angular/
+server/.local-mongodb/
+/uploads/
+/server/uploads/
+test-results/
+playwright-report/
+package-lock.json

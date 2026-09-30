@@ -2,16 +2,8 @@ import { Room } from "./models.js";
 export async function seedRooms() {
   for (const [name, category, description] of [
     ["The Lobby", "General", "A little hello can start a great conversation."],
-    [
-      "Music Lounge",
-      "Music",
-      "New finds, old favourites, and everything on repeat.",
-    ],
-    [
-      "Game Night",
-      "Gaming",
-      "Find your next teammate. Share what you are playing.",
-    ],
+    ["Music Lounge", "Music", "New finds, old favourites, and everything on repeat."],
+    ["Game Night", "Gaming", "Find your next teammate. Share what you are playing."],
     [
       "Language Exchange",
       "Learning",

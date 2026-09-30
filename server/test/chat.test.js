@@ -39,9 +39,7 @@ async function socket(cookie) {
 }
 const emit = (s, event, data = {}) =>
   new Promise((resolve, reject) =>
-    s
-      .timeout(5000)
-      .emit(event, data, (err, r) => (err ? reject(err) : resolve(r))),
+    s.timeout(5000).emit(event, data, (err, r) => (err ? reject(err) : resolve(r))),
   );
 const event = (s, name) =>
   new Promise((resolve, reject) => {
@@ -68,8 +66,7 @@ before(async () => {
 after(async () => {
   for (const s of sockets) s.disconnect();
   await new Promise((r) => io?.close(r));
-  if (mongoose.connection.readyState === 1)
-    await mongoose.connection.dropDatabase();
+  if (mongoose.connection.readyState === 1) await mongoose.connection.dropDatabase();
   await mongoose.disconnect();
   await mongo?.stop();
   if (dir) await rm(dir, { recursive: true, force: true });
@@ -141,15 +138,12 @@ test("registration, login, uniqueness, HttpOnly cookie and origin checks", async
 test("private room isolation, invite join, owner moderation and upload authorization", async () => {
   const a = await guest("Owner"),
     b = await guest("Visitor");
-  const created = await req()
-    .post("/api/rooms")
-    .set(auth(a.cookie))
-    .send({
-      name: "Private test",
-      description: "Members only",
-      category: "General",
-      private: true,
-    });
+  const created = await req().post("/api/rooms").set(auth(a.cookie)).send({
+    name: "Private test",
+    description: "Members only",
+    category: "General",
+    private: true,
+  });
   assert.equal(created.status, 201, created.text);
   const r = created.body;
   const strangerList = await req().get("/api/rooms").set(auth(b.cookie));
@@ -232,8 +226,7 @@ test("direct messages, blocking and random matching require real peers", async (
   );
   await emit(sa, "room:join", { room: room.id });
   assert.equal(
-    (await emit(sa, "message:send", { room: room.id, text: "Private hello" }))
-      .ok,
+    (await emit(sa, "message:send", { room: room.id, text: "Private hello" })).ok,
     true,
   );
   await req()
@@ -282,10 +275,7 @@ test("shared whiteboard persistence and reports limited to admins", async () => 
     ).status,
     201,
   );
-  assert.equal(
-    (await req().get("/api/admin/reports").set(auth(a.cookie))).status,
-    403,
-  );
+  assert.equal((await req().get("/api/admin/reports").set(auth(a.cookie))).status, 403);
   await User.updateOne({ _id: a.user.id }, { $set: { role: "admin" } });
   const reports = await req().get("/api/admin/reports").set(auth(a.cookie));
   assert.equal(reports.status, 200);

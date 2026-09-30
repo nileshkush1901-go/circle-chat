@@ -28,18 +28,9 @@ test("session parsing, hashing and malformed-token rejection", async () => {
 });
 test("malformed object IDs rejected; moderator rights not inferred from membership", () => {
   assert.throws(() => id("not-valid"), /Invalid ID/);
-  assert.equal(
-    canModerate({ owner: "owner" }, { _id: "someone", role: "user" }),
-    false,
-  );
-  assert.equal(
-    canModerate({ owner: "owner" }, { _id: "owner", role: "user" }),
-    true,
-  );
-  assert.equal(
-    canModerate({ owner: "owner" }, { _id: "other", role: "admin" }),
-    true,
-  );
+  assert.equal(canModerate({ owner: "owner" }, { _id: "someone", role: "user" }), false);
+  assert.equal(canModerate({ owner: "owner" }, { _id: "owner", role: "user" }), true);
+  assert.equal(canModerate({ owner: "owner" }, { _id: "other", role: "admin" }), true);
 });
 test("health endpoint and baseline security headers", async () => {
   const r = await request(app).get("/api/health");

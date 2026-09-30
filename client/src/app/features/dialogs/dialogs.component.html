@@ -1,0 +1,223 @@
+@if (state.me) {
+  @if (state.modal) {
+    <div class="modal-backdrop">
+      <section
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        [attr.aria-label]="state.modal"
+      >
+        <button
+          class="modal-close icon-button"
+          aria-label="Close dialog"
+          (click)="
+            state.modal === 'random'
+              ? state.run(rooms.cancelRandom())
+              : (state.modal = '')
+          "
+        >
+          ×
+        </button>
+        @if (state.modal === "create") {
+          <div class="eyebrow">MAKE IT YOURS</div>
+          <h2>Create a room</h2>
+          <p>Give your people a place to gather.</p>
+          <form (ngSubmit)="state.run(rooms.createRoom())">
+            <label for="room-name">Room name</label
+            ><input
+              id="room-name"
+              name="room-name"
+              [(ngModel)]="state.roomName"
+              placeholder="The midnight book club"
+              minlength="3"
+              maxlength="40"
+              required
+            /><label for="description">Description</label
+            ><textarea
+              id="description"
+              name="description"
+              [(ngModel)]="state.roomDescription"
+              maxlength="180"
+              placeholder="What will you talk about?"
+            ></textarea
+            ><label for="category">Category</label
+            ><select id="category" name="category" [(ngModel)]="state.roomCategory">
+              @for (cat of state.categories.slice(1); track cat) {
+                <option>{{ cat }}</option>
+              }</select
+            ><label class="checkbox"
+              ><input
+                type="checkbox"
+                name="private"
+                [(ngModel)]="state.roomPrivate"
+              />Private room · invite code required</label
+            ><button class="primary full" [disabled]="state.busy" type="submit">
+              {{ state.busy ? "Creating…" : "Create room" }}
+            </button>
+          </form>
+        }
+        @if (state.modal === "invite") {
+          <h2>You’re invited.</h2>
+          <p>Enter the invitation code shared by the room owner.</p>
+          <form (ngSubmit)="state.run(rooms.joinInvite())">
+            <label for="invite-code">Invitation code</label
+            ><input
+              id="invite-code"
+              name="invite-code"
+              [(ngModel)]="state.inviteCode"
+              required
+            /><button class="primary full" type="submit">Join room</button>
+          </form>
+        }
+        @if (state.modal === "profile" && state.profile) {
+          <span class="avatar large" [style.background]="state.profile.color">{{
+            state.initials(state.profile.name)
+          }}</span>
+          <h2>{{ state.profile.name }}</h2>
+          <div class="category-tag">
+            {{ state.profile.guest ? "Guest" : "Member" }}
+          </div>
+          <p>
+            {{
+              state.profile.bio || "No bio yet. A good conversation can tell you more."
+            }}
+          </p>
+          @if (state.profile.id !== state.me.id) {
+            <button
+              class="primary full"
+              (click)="state.run(rooms.direct(state.profile.id))"
+            >
+              Send a message
+            </button>
+            <div class="button-row">
+              <button
+                class="text-button"
+                (click)="state.run(profile.block(state.profile.id))"
+              >
+                Block user
+              </button>
+              @if (
+                state.isModerator &&
+                state.active?.kind === "room" &&
+                state.profile.id !== state.active?.owner
+              ) {
+                <button
+                  class="text-button danger-text"
+                  (click)="state.run(moderation.ban(state.profile.id))"
+                >
+                  Remove from room
+                </button>
+              }
+            </div>
+          }
+        }
+        @if (state.modal === "settings") {
+          <h2>Your profile</h2>
+          <form (ngSubmit)="state.run(profile.saveProfile())">
+            <label for="edit-name">Display name</label
+            ><input
+              id="edit-name"
+              name="edit-name"
+              [(ngModel)]="state.editName"
+              required
+              minlength="2"
+              maxlength="24"
+            /><label for="edit-bio">A little about you</label
+            ><textarea
+              id="edit-bio"
+              name="edit-bio"
+              [(ngModel)]="state.editBio"
+              maxlength="180"
+            ></textarea
+            ><label for="edit-color">Avatar colour</label
+            ><input
+              id="edit-color"
+              name="edit-color"
+              type="color"
+              [(ngModel)]="state.editColor"
+            /><button class="primary full" type="submit">Save profile</button>
+          </form>
+          @if (state.blocked.length) {
+            <h3>Blocked users</h3>
+            @for (p of state.blocked; track p.id) {
+              <div class="blocked-row">
+                <span>{{ p.name }}</span
+                ><button class="text-button" (click)="state.run(profile.unblock(p.id))">
+                  Unblock
+                </button>
+              </div>
+            }
+          }
+          <button
+            class="text-button danger-text full"
+            (click)="state.run(session.logout())"
+          >
+            Sign out
+          </button>
+        }
+        @if (state.modal === "report") {
+          <h2>Report a message</h2>
+          <p>Help the moderation team understand what happened.</p>
+          <blockquote>{{ state.reportMessage?.text }}</blockquote>
+          <form (ngSubmit)="state.run(moderation.report())">
+            <label for="reason">Reason</label
+            ><textarea
+              id="reason"
+              name="reason"
+              [(ngModel)]="state.reportReason"
+              minlength="5"
+              maxlength="500"
+              required
+              placeholder="Describe the concern"
+            ></textarea
+            ><button class="primary full" type="submit">Send report</button>
+          </form>
+        }
+        @if (state.modal === "random") {
+          <div class="random-wait-symbol">⤨</div>
+          <h2>
+            {{ state.waiting ? "Finding your next hello…" : "Meet someone new" }}
+          </h2>
+          <p>
+            We’ll connect you with another person who is also looking for a conversation.
+            Keep this window open.
+          </p>
+          <p class="small">
+            If nobody else is waiting, ask a friend to open the app in another browser and
+            choose “Meet someone new”.
+          </p>
+          <button class="outline full" (click)="state.run(rooms.cancelRandom())">
+            Cancel search
+          </button>
+        }
+        @if (state.modal === "room-info" && state.active) {
+          <div class="eyebrow">
+            {{ state.active.private ? "PRIVATE" : "PUBLIC" }} CONVERSATION
+          </div>
+          <h2>{{ state.active.name }}</h2>
+          <p>{{ state.active.description }}</p>
+          <div class="category-tag">{{ state.members.length }} members</div>
+          @if (state.active.invite && state.active.private) {
+            <h3>Invitation code</h3>
+            <p class="small">Share this code with someone you want to invite.</p>
+            <input aria-label="Invitation code" readonly [value]="state.active.invite" />
+          }
+          <h3>People</h3>
+          <div class="modal-members">
+            @for (p of state.members; track p.id) {
+              <button class="person" (click)="state.run(profile.showProfile(p.id))">
+                <span class="avatar" [style.background]="p.color">{{
+                  state.initials(p.name)
+                }}</span
+                ><span>{{ p.name }}</span>
+              </button>
+            }
+          </div>
+        }
+        @if (state.error) {
+          <div class="error" role="alert">{{ state.error }}</div>
+        }
+      </section>
+    </div>
+  }
+}

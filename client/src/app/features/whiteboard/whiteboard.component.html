@@ -1,0 +1,52 @@
+@if (state.me && state.active) {
+  @if (state.activity === "board") {
+    <section class="activity-panel">
+      <div class="activity-toolbar">
+        <strong>Shared whiteboard</strong
+        ><label>Ink <input type="color" [(ngModel)]="state.ink" /></label>
+        @if (state.isModerator) {
+          <button class="text-button" (click)="state.run(activities.clearBoard())">
+            Clear board
+          </button>
+        }
+        <button
+          class="icon-button"
+          aria-label="Close whiteboard"
+          (click)="state.activity = ''"
+        >
+          ×
+        </button>
+      </div>
+      <svg
+        class="whiteboard"
+        viewBox="0 0 800 450"
+        preserveAspectRatio="none"
+        aria-label="Shared drawing canvas"
+        (pointerdown)="activities.beginStroke($event)"
+        (pointermove)="activities.moveStroke($event)"
+        (pointerup)="state.run(activities.endStroke())"
+        (pointercancel)="state.currentStroke = null"
+      >
+        @for (stroke of state.board; track $index) {
+          <polyline
+            [attr.points]="activities.points(stroke)"
+            [attr.stroke]="stroke.color"
+            fill="none"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        }
+        @if (state.currentStroke) {
+          <polyline
+            [attr.points]="activities.points(state.currentStroke)"
+            [attr.stroke]="state.currentStroke.color"
+            fill="none"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+        }
+      </svg>
+    </section>
+  }
+}

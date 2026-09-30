@@ -1,0 +1,48 @@
+@if (state.me && state.active) {
+  <div class="composer-area">
+    <div class="typing">{{ state.typingNames }}</div>
+    @if (state.attachment) {
+      <div class="attachment-preview">
+        <span>{{ state.attachment.name }}</span
+        ><button
+          class="icon-button"
+          aria-label="Remove attachment"
+          (click)="state.attachment = null"
+        >
+          ×
+        </button>
+      </div>
+    }
+    <form class="composer" (ngSubmit)="state.run(messages.send())">
+      <label class="attach-button" title="Attach image, video or audio"
+        ><input
+          type="file"
+          accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,audio/mpeg,audio/ogg,audio/wav"
+          (change)="state.run(messages.upload($event))"
+          [disabled]="state.busy"
+          aria-label="Attach file"
+        /><span>+</span></label
+      ><input
+        name="message"
+        aria-label="Message"
+        [(ngModel)]="state.draft"
+        (input)="messages.typing()"
+        [placeholder]="'Message ' + state.active.name"
+        maxlength="2000"
+        autocomplete="off"
+      /><button
+        class="send-button"
+        type="submit"
+        [disabled]="
+          state.busy || !state.connected || (!state.draft.trim() && !state.attachment)
+        "
+      >
+        {{ state.busy ? "…" : "Send" }}
+      </button>
+    </form>
+    <div class="composer-hint">
+      <span>Keep it kind. Keep it human.</span
+      ><span>{{ state.draft.length }} / 2000</span>
+    </div>
+  </div>
+}

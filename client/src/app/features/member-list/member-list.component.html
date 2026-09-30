@@ -1,0 +1,29 @@
+@if (state.me && state.active) {
+  <aside class="people-panel">
+    <div class="sidebar-heading">
+      IN THIS CONVERSATION <span>{{ state.members.length }}</span>
+    </div>
+    @for (person of state.members; track person.id) {
+      <button class="person" (click)="state.run(profile.showProfile(person.id))">
+        <span class="avatar" [style.background]="person.color">{{
+          state.initials(person.name)
+        }}</span
+        ><span
+          ><strong
+            >{{ person.name }}{{ person.id === state.me.id ? " (you)" : "" }}</strong
+          ><small
+            ><i class="presence-dot" [class.online]="person.online"></i
+            >{{ person.online ? "Online" : "Offline" }}</small
+          ></span
+        >
+      </button>
+    }
+    <div class="room-guidelines">
+      <strong>A little room etiquette</strong>
+      <p>
+        Respect each other’s space.<br />Ask before calling.<br />Report anything that
+        feels wrong.
+      </p>
+    </div>
+  </aside>
+}

@@ -1,0 +1,30 @@
+@if (state.me) {
+  <main class="discover">
+    <h1>Reports to review</h1>
+    <p class="muted">{{ state.reports.length }} open reports</p>
+    @for (r of state.reports; track r.id) {
+      <article class="report-card">
+        <h3>{{ r.reason }}</h3>
+        <blockquote>
+          {{ r.content?.text || "Message unavailable" }}
+        </blockquote>
+        <small>Reported {{ r.createdAt | date: "medium" }}</small>
+        <div class="button-row">
+          <button class="outline" (click)="state.run(moderation.resolveReport(r))">
+            Resolve
+          </button>
+          @if (r.content) {
+            <button class="danger" (click)="state.run(moderation.resolveReport(r, true))">
+              Ban sender & resolve
+            </button>
+          }
+        </div>
+      </article>
+    } @empty {
+      <div class="empty">
+        <h2>All caught up.</h2>
+        <p>New reports will appear here.</p>
+      </div>
+    }
+  </main>
+}

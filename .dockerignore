@@ -5,8 +5,8 @@ client/dist
 client/.angular
 .git
 .env
-uploads
-server/uploads
+/uploads/
+/server/uploads/
 *.zip
 
 server/.local-mongodb

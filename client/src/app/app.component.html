@@ -1,0 +1,26 @@
+@if (state.loading) {
+  <div class="loading">
+    <span class="brand-mark">c</span>
+    <h2>Opening Circle…</h2>
+  </div>
+} @else if (!state.me) {
+  <app-auth />
+} @else {
+  <div class="app-shell">
+    <app-sidebar />
+    <div class="main-shell">
+      <app-topbar />
+      @if (state.view === "rooms") {
+        <app-room-directory />
+      } @else if (state.view === "messages") {
+        <app-inbox />
+      } @else if (state.view === "admin") {
+        <app-admin />
+      } @else if (state.active) {
+        <app-chat />
+      }
+    </div>
+  </div>
+  <app-dialogs />
+  <app-call-panel />
+}

@@ -1,0 +1,60 @@
+@if (state.me && state.active) {
+  <header class="chat-header">
+    <div class="chat-title">
+      <span class="room-symbol small-symbol">{{
+        state.active.kind === "dm" ? "☏" : state.icon(state.active.category)
+      }}</span>
+      <div>
+        <h1>{{ state.active.name }}</h1>
+        <p>
+          {{
+            state.active.kind === "dm" ? "Private conversation" : state.active.description
+          }}
+        </p>
+      </div>
+    </div>
+    <div class="chat-actions">
+      @if (state.active.kind === "dm") {
+        <button
+          class="icon-button"
+          title="Voice call"
+          aria-label="Voice call"
+          (click)="state.run(calls.callPeer(false))"
+        >
+          ☎</button
+        ><button
+          class="icon-button"
+          title="Video call"
+          aria-label="Video call"
+          (click)="state.run(calls.callPeer(true))"
+        >
+          ▣
+        </button>
+      }
+      <button
+        class="icon-button"
+        [class.selected]="state.activity === 'board'"
+        title="Shared whiteboard"
+        aria-label="Shared whiteboard"
+        (click)="state.run(activities.openActivity('board'))"
+      >
+        ✎</button
+      ><button
+        class="icon-button"
+        [class.selected]="state.activity === 'watch'"
+        title="Watch together"
+        aria-label="Watch together"
+        (click)="state.run(activities.openActivity('watch'))"
+      >
+        ▷</button
+      ><button
+        class="icon-button"
+        title="Room information"
+        aria-label="Room information"
+        (click)="state.modal = 'room-info'"
+      >
+        ⓘ
+      </button>
+    </div>
+  </header>
+}

@@ -1,0 +1,79 @@
+@if (state.me) {
+  <main class="discover">
+    <div class="page-heading">
+      <div>
+        <div class="eyebrow">FIND YOUR PEOPLE</div>
+        <h1>There’s a room for that.</h1>
+        <p>A shared interest. A new perspective. A conversation worth having.</p>
+      </div>
+      <button class="primary" (click)="state.modal = 'create'">+ Create a room</button>
+    </div>
+    <div class="discovery-tools">
+      <label class="search"
+        ><span>⌕</span
+        ><input
+          aria-label="Search rooms"
+          [(ngModel)]="state.search"
+          placeholder="Find your next conversation" /></label
+      ><span class="room-total">{{ state.filteredRooms.length }} rooms to explore</span>
+    </div>
+    <div class="chips" aria-label="Room categories">
+      @for (cat of state.categories; track cat) {
+        <button [class.selected]="state.category === cat" (click)="state.category = cat">
+          {{ cat }}
+        </button>
+      }
+    </div>
+    <div class="room-grid">
+      @for (room of state.filteredRooms; track room.id) {
+        <article class="room-card">
+          <div class="room-card-top">
+            <span class="room-symbol" [attr.data-category]="room.category">{{
+              state.icon(room.category)
+            }}</span
+            ><span class="category-tag">{{
+              room.private ? "Private" : room.category
+            }}</span>
+          </div>
+          <h2>{{ room.name }}</h2>
+          <p>{{ room.description }}</p>
+          <div class="room-card-bottom">
+            <span class="people-count">{{ room.online || 0 }} here now</span
+            ><button
+              class="join-button"
+              (click)="state.run(rooms.openRoom(room))"
+              [disabled]="!state.connected"
+            >
+              Join room <span>↗</span>
+            </button>
+          </div>
+        </article>
+      } @empty {
+        <div class="empty">
+          <h2>No rooms found</h2>
+          <p>Try another search or create a room of your own.</p>
+          <button class="outline" (click)="state.search = ''; state.category = 'All'">
+            Clear filters
+          </button>
+        </div>
+      }
+    </div>
+    <section class="random-card">
+      <div class="random-symbol">⤨</div>
+      <div>
+        <h2>Leave a little room for surprise.</h2>
+        <p>One person. One conversation. See where it goes.</p>
+      </div>
+      <button
+        class="outline"
+        (click)="state.run(rooms.random())"
+        [disabled]="!state.connected"
+      >
+        Meet someone new
+      </button>
+    </section>
+    <div class="subtle-footer">
+      No fake online counts. No bot conversations. Just the people who join.
+    </div>
+  </main>
+}

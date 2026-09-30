@@ -1,4 +1,4 @@
-﻿# Deploy on Render Free with MongoDB Atlas Free
+# Deploy on Render Free with MongoDB Atlas Free
 
 1. Create a MongoDB Atlas Free cluster and a database user with read/write
    access to the `circle` database. Copy the Drivers connection string, replace
@@ -28,6 +28,7 @@ Before a wider public launch, configure trusted proxy handling for the deployed
 request chain and verify that client addresses cannot be spoofed.
 
 References:
+
 - https://render.com/docs/free
 - https://render.com/docs/blueprint-spec
 - https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/

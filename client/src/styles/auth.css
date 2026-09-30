@@ -1,0 +1,141 @@
+.entry {
+  max-width: 1400px;
+  min-height: 100dvh;
+  margin: auto;
+  padding: 32px 6% 20px;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(ellipse at 15% 45%, #eeebff 0, transparent 50%);
+}
+.entry-header,
+.entry-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.entry-header > span,
+.entry-footer {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.entry-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 10%;
+  align-items: center;
+  flex: 1;
+  padding: 70px 0;
+}
+.entry-story h1 {
+  font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+  line-height: 1.1;
+  letter-spacing: -2.4px;
+  margin-bottom: 24px;
+  font-weight: 740;
+}
+.entry-story h1 span {
+  color: var(--purple);
+}
+.entry-story > p {
+  max-width: 430px;
+  font-size: 1.05rem;
+}
+.preview-rooms {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 36px;
+  max-width: 380px;
+}
+.preview-rooms > div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border: 1px solid #e2def4;
+  background: #ffffffaa;
+  border-radius: 12px;
+}
+.preview-rooms > div:nth-child(2) {
+  margin-left: 30px;
+}
+.preview-rooms > div:nth-child(3) {
+  margin-left: 12px;
+}
+.preview-rooms strong {
+  font-size: 0.9rem;
+}
+.preview-rooms small {
+  display: block;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.entry-note {
+  display: flex;
+  gap: 18px;
+  color: #8b849e;
+  font-size: 0.75rem;
+  margin-top: 35px;
+}
+.entry-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 70px #26203e09;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 470px;
+}
+.entry-card h2 {
+  font-size: 1.65rem;
+  letter-spacing: -0.7px;
+  margin-bottom: 12px;
+}
+.entry-card > p {
+  font-size: 0.9rem;
+}
+.segmented {
+  display: flex;
+  gap: 3px;
+  padding: 4px;
+  background: #f3f3f8;
+  border-radius: 10px;
+  margin: 25px 0;
+}
+.segmented button {
+  flex: 1;
+  border-radius: 7px;
+  padding: 9px 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.segmented button.selected {
+  background: white;
+  color: var(--purple);
+  box-shadow: 0 2px 6px #2426350a;
+  font-weight: 650;
+}
+.entry-foot {
+  font-size: 0.75rem;
+  text-align: center;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+.entry-card .small {
+  font-size: 0.75rem;
+  text-align: center;
+  margin: 16px 0 0;
+}
+.loading {
+  height: 100dvh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 20px;
+}
+.loading h2 {
+  font-size: 1rem;
+  color: var(--muted);
+}

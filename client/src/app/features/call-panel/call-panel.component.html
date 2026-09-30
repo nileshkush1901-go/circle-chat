@@ -1,0 +1,44 @@
+@if (state.me) {
+  @if (state.call) {
+    <div class="call-panel" role="dialog" aria-label="Call">
+      <div class="call-heading">
+        <div>
+          <strong>{{ state.call.from.name }}</strong
+          ><small>{{ state.callStatus }}</small>
+        </div>
+        <span>{{ state.call.video ? "Video call" : "Voice call" }}</span>
+      </div>
+      @if (state.call.incoming) {
+        <div class="incoming-call">
+          <span class="avatar large" [style.background]="state.call.from.color">{{
+            state.initials(state.call.from.name)
+          }}</span>
+          <p>Would you like to answer?</p>
+          <div class="button-row">
+            <button class="primary" (click)="state.run(calls.answerCall(true))">
+              Answer</button
+            ><button class="danger" (click)="state.run(calls.answerCall(false))">
+              Decline
+            </button>
+          </div>
+        </div>
+      } @else {
+        <div class="call-videos">
+          <video appView="remoteVideo" autoplay playsinline></video
+          ><video appView="localVideo" autoplay playsinline muted></video>
+        </div>
+        <div class="call-controls">
+          <button class="outline" (click)="calls.toggleMic()">
+            {{ state.muted ? "Unmute" : "Mute" }}
+          </button>
+          @if (state.call.video) {
+            <button class="outline" (click)="calls.toggleVideo()">
+              {{ state.videoOff ? "Camera on" : "Camera off" }}
+            </button>
+          }
+          <button class="danger" (click)="state.run(calls.endCall())">End call</button>
+        </div>
+      }
+    </div>
+  }
+}

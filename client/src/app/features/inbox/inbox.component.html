@@ -1,0 +1,31 @@
+@if (state.me) {
+  <main class="discover">
+    <div class="page-heading">
+      <div>
+        <div class="eyebrow">JUST BETWEEN YOU</div>
+        <h1>Keep the conversation going.</h1>
+        <p>Your private messages live here.</p>
+      </div>
+    </div>
+    <div class="conversation-list">
+      @for (room of state.conversations; track room.id) {
+        <button (click)="state.run(rooms.openRoom(room))">
+          <span class="avatar" [style.background]="room.peer?.color">{{
+            state.initials(room.name)
+          }}</span
+          ><span
+            ><strong>{{ room.name }}</strong
+            ><small>{{ room.peer?.bio || "Open your conversation" }}</small></span
+          ><span>↗</span>
+        </button>
+      } @empty {
+        <div class="empty">
+          <span class="empty-symbol">☏</span>
+          <h2>A hello goes a long way.</h2>
+          <p>Join a room and select someone’s profile to start a private conversation.</p>
+          <button class="primary" (click)="state.view = 'rooms'">Explore rooms</button>
+        </div>
+      }
+    </div>
+  </main>
+}

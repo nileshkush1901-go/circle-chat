@@ -1,0 +1,37 @@
+@if (state.me) {
+  <header class="topbar">
+    <div class="topbar-title">
+      <button
+        class="icon-button mobile-toggle"
+        aria-label="Toggle navigation"
+        (click)="state.mobileMenu = !state.mobileMenu"
+      >
+        ☰</button
+      ><span>{{
+        state.view === "chat"
+          ? state.active?.name
+          : state.view === "messages"
+            ? "Your
+          messages"
+            : state.view === "admin"
+              ? "Moderation"
+              : "Discover"
+      }}</span>
+    </div>
+    <div class="connection" [class.offline]="!state.connected">
+      <i></i>{{ state.connected ? "Connected" : "Reconnecting…" }}
+    </div>
+  </header>
+  @if (state.error) {
+    <div class="banner error" role="alert">
+      {{ state.error
+      }}<button aria-label="Dismiss error" (click)="state.error = ''">×</button>
+    </div>
+  }
+  @if (state.notice) {
+    <div class="banner notice" role="status">
+      {{ state.notice
+      }}<button aria-label="Dismiss notification" (click)="state.notice = ''">×</button>
+    </div>
+  }
+}

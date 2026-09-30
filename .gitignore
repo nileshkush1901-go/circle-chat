@@ -2,8 +2,8 @@ node_modules/
 client/dist/
 client/.angular/
 .env
-uploads/
-server/uploads/
+/uploads/
+/server/uploads/
 *.log
 coverage/
 
@@ -14,3 +14,6 @@ server/.local-mongodb/
 .netlify/
 *.pem
 *.key
+
+test-results/
+playwright-report/

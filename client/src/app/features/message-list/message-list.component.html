@@ -1,0 +1,103 @@
+@if (state.me && state.active) {
+  <div
+    class="messages"
+    appView="messageList"
+    aria-label="Chat messages"
+    role="log"
+    aria-live="polite"
+  >
+    @if (state.older && state.messages.length) {
+      <button class="text-button older" (click)="state.run(messages.loadOlder())">
+        Load earlier messages
+      </button>
+    }
+    <div class="chat-start">
+      <span class="chat-start-symbol">{{ state.active.kind === "dm" ? "☏" : "#" }}</span>
+      <h2>
+        {{
+          state.active.kind === "dm"
+            ? "A conversation of your own."
+            : "Welcome to
+              " + state.active.name
+        }}
+      </h2>
+      <p>
+        {{
+          state.active.kind === "dm"
+            ? "Only the two of you can access this
+              conversation."
+            : "Say hello. Share something. Make yourself at
+              home."
+        }}
+      </p>
+    </div>
+    @for (m of state.messages; track m.id) {
+      <article class="message" [class.own]="m.user === state.me.id">
+        <button
+          class="avatar"
+          [style.background]="m.color"
+          [attr.aria-label]="'View ' + m.name + ' profile'"
+          (click)="state.run(profile.showProfile(m.user))"
+        >
+          {{ state.initials(m.name) }}
+        </button>
+        <div class="message-body">
+          <div class="message-meta">
+            <button (click)="state.run(profile.showProfile(m.user))">
+              {{ m.name }}
+            </button>
+            @if (m.user === state.me.id) {
+              <span class="you">you</span>
+            }
+            <time>{{ m.createdAt | date: "shortTime" }}</time>
+          </div>
+          <div class="message-text" [class.deleted]="m.deleted">
+            {{ m.text }}
+          </div>
+          @if (m.attachment) {
+            <div class="attachment">
+              @if (state.media[m.attachment]?.mime?.startsWith("image/")) {
+                <a [href]="'/api/uploads/' + m.attachment" target="_blank" rel="noopener"
+                  ><img
+                    [src]="'/api/uploads/' + m.attachment"
+                    [alt]="state.media[m.attachment]?.name || 'Shared image'"
+                    loading="lazy"
+                /></a>
+              } @else if (state.media[m.attachment]?.mime?.startsWith("video/")) {
+                <video
+                  [src]="'/api/uploads/' + m.attachment"
+                  controls
+                  playsinline
+                ></video>
+              } @else if (state.media[m.attachment]?.mime?.startsWith("audio/")) {
+                <audio [src]="'/api/uploads/' + m.attachment" controls></audio>
+              } @else {
+                <span>Loading attachment…</span>
+              }
+            </div>
+          }
+        </div>
+        <div class="message-tools">
+          @if (m.user !== state.me.id) {
+            <button
+              title="Report message"
+              aria-label="Report message"
+              (click)="state.reportMessage = m; state.modal = 'report'"
+            >
+              ⚑
+            </button>
+          }
+          @if ((m.user === state.me.id || state.isModerator) && !m.deleted) {
+            <button
+              title="Remove message"
+              aria-label="Remove message"
+              (click)="state.run(messages.remove(m))"
+            >
+              ×
+            </button>
+          }
+        </div>
+      </article>
+    }
+  </div>
+}

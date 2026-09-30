@@ -1,0 +1,277 @@
+@media (min-width: 1600px) {
+  .discover {
+    padding: 50px 5%;
+  }
+  .room-card {
+    padding: 28px;
+  }
+  .room-card p {
+    min-height: 40px;
+  }
+  .room-grid {
+    gap: 22px;
+  }
+  .room-card h2 {
+    font-size: 1.15rem;
+  }
+  .room-card p {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 1200px) {
+  .sidebar {
+    width: 225px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .discover {
+    padding: 30px 25px;
+  }
+  .topbar {
+    padding: 0 25px;
+  }
+  .room-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .people-panel {
+    width: 180px;
+  }
+  .page-heading h1 {
+    font-size: 1.7rem;
+  }
+  .page-heading > .primary {
+    display: none;
+  }
+  .room-card p {
+    min-height: 24px;
+  }
+  .chat-header {
+    padding: 18px;
+  }
+  .chat-actions {
+    gap: 0;
+  }
+}
+@media (max-width: 1000px) {
+  .people-panel {
+    display: none;
+  }
+  .entry-grid {
+    gap: 6%;
+  }
+  .entry-card {
+    padding: 28px;
+  }
+  .entry-story h1 {
+    font-size: 3rem;
+  }
+  .random-card {
+    padding: 22px;
+    gap: 15px;
+  }
+  .random-card .outline {
+    white-space: normal;
+  }
+  .chat-title p {
+    max-width: 35vw;
+  }
+}
+@media (max-width: 760px) {
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 15;
+    width: 250px;
+    box-shadow: 20px 0 40px #25213a33;
+    transform: translateX(-110%);
+    transition: transform 0.2s;
+  }
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  .mobile-toggle {
+    display: flex;
+  }
+  .topbar {
+    height: 60px;
+    padding: 0 16px;
+  }
+  .discover {
+    padding: 27px 18px;
+  }
+  .page-heading h1 {
+    font-size: 1.6rem;
+  }
+  .page-heading p {
+    font-size: 0.875rem;
+  }
+  .room-total {
+    display: none;
+  }
+  .room-card {
+    padding: 18px;
+  }
+  .room-card p {
+    min-height: 42px;
+    font-size: 0.875rem;
+  }
+  .room-grid {
+    gap: 12px;
+  }
+  .chips {
+    gap: 2px;
+  }
+  .chips button {
+    padding: 8px 12px;
+  }
+  .random-card {
+    flex-wrap: wrap;
+  }
+  .random-card > div:nth-child(2) {
+    flex: 1;
+  }
+  .random-card .outline {
+    margin-left: 45px;
+  }
+  .chat-header {
+    padding: 14px;
+  }
+  .chat-title p {
+    max-width: 40vw;
+  }
+  .chat-title .room-symbol {
+    display: none;
+  }
+  .chat-title h1 {
+    font-size: 0.9rem;
+  }
+  .chat-actions .icon-button {
+    width: 29px;
+    font-size: 1.1rem;
+  }
+  .messages {
+    padding: 0 16px 15px;
+  }
+  .composer-area {
+    padding: 0 14px 12px;
+  }
+  .entry {
+    padding: 24px;
+  }
+  .entry-header > span {
+    display: none;
+  }
+  .entry-grid {
+    grid-template-columns: 1fr;
+    padding: 40px 0;
+    gap: 30px;
+  }
+  .entry-story h1 {
+    font-size: 2.7rem;
+  }
+  .entry-story > p {
+    font-size: 0.95rem;
+  }
+  .preview-rooms,
+  .entry-note {
+    display: none;
+  }
+  .entry-card {
+    max-width: none;
+  }
+  .entry-footer > span:last-child {
+    display: none;
+  }
+  .entry-story .eyebrow {
+    font-size: 0.75rem;
+  }
+  .entry-card h2 {
+    font-size: 1.5rem;
+  }
+  .entry-card {
+    padding: 28px;
+  }
+  .entry-footer {
+    font-size: 0.75rem;
+  }
+  .chat-start {
+    padding: 25px 0 20px;
+  }
+  .chat-start h2 {
+    font-size: 1.15rem;
+  }
+  .modal {
+    padding: 28px;
+  }
+  .message-tools {
+    opacity: 1;
+  }
+  .activity-panel {
+    padding: 12px 15px;
+  }
+  .watch-controls {
+    flex-wrap: wrap;
+  }
+  .watch-controls select {
+    flex-basis: 100%;
+  }
+}
+@media (max-width: 430px) {
+  .room-grid {
+    grid-template-columns: 1fr;
+  }
+  .room-card p {
+    min-height: 0;
+    margin-bottom: 18px;
+  }
+  .room-card-top {
+    margin-bottom: 16px;
+  }
+  .room-card {
+    padding: 20px;
+  }
+  .room-card h2 {
+    font-size: 1.1rem;
+  }
+  .random-card h2 {
+    line-height: 1.4;
+  }
+  .chat-title p {
+    display: none;
+  }
+  .chat-header {
+    min-height: 60px;
+  }
+  .message {
+    gap: 9px;
+  }
+  .message .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.room-card p,
+.message-text,
+.entry-story > p {
+  font-size: 1rem;
+}
+.chips button,
+.join-button,
+.category-tag,
+.search > input,
+.sidebar nav button,
+.joined-rooms > button,
+.primary,
+.outline,
+.composer > input {
+  font-size: 0.875rem;
+}

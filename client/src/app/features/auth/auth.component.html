@@ -1,0 +1,140 @@
+<main class="entry">
+  <header class="entry-header">
+    <a class="brand" href="/"
+      ><span class="brand-mark">c</span>circle<span class="brand-dot">.</span></a
+    ><span>A place for good conversations</span>
+  </header>
+  <div class="entry-grid">
+    <section class="entry-story">
+      <div class="eyebrow">YOUR NEXT CONVERSATION STARTS HERE</div>
+      <h1>Small hellos.<br /><span>Big connections.</span></h1>
+      <p>Drop into a room, find a shared interest, or meet someone completely new.</p>
+      <div class="preview-rooms">
+        <div>
+          <span class="room-symbol music">♫</span>
+          <div><strong>Music Lounge</strong><small>What’s on repeat?</small></div>
+        </div>
+        <div>
+          <span class="room-symbol gaming">⌘</span>
+          <div><strong>Game Night</strong><small>Find your next teammate.</small></div>
+        </div>
+        <div>
+          <span class="room-symbol travel">✈</span>
+          <div><strong>Wanderers</strong><small>Stories from everywhere.</small></div>
+        </div>
+      </div>
+      <div class="entry-note">
+        <span>Public rooms</span><span>Private conversations</span
+        ><span>Your own pace</span>
+      </div>
+    </section>
+    <section class="entry-card">
+      <div class="eyebrow">COME ON IN</div>
+      <h2>
+        {{
+          state.authMode === "login"
+            ? "Welcome back."
+            : state.authMode === "register"
+              ? "Make
+        yourself at home."
+              : "What should we call you?"
+        }}
+      </h2>
+      <p>
+        {{
+          state.authMode === "guest"
+            ? "Pick a nickname. No account needed."
+            : "Your
+        conversations, in one familiar place."
+        }}
+      </p>
+      <div class="segmented" aria-label="Sign in options">
+        <button
+          [class.selected]="state.authMode === 'guest'"
+          (click)="state.authMode = 'guest'; state.error = ''"
+        >
+          Guest</button
+        ><button
+          [class.selected]="state.authMode === 'login'"
+          (click)="state.authMode = 'login'; state.error = ''"
+        >
+          Sign in</button
+        ><button
+          [class.selected]="state.authMode === 'register'"
+          (click)="state.authMode = 'register'; state.error = ''"
+        >
+          Register
+        </button>
+      </div>
+      <form (ngSubmit)="session.authenticate()">
+        @if (state.authMode !== "login") {
+          <label for="nickname">Nickname</label
+          ><input
+            id="nickname"
+            name="nickname"
+            [(ngModel)]="state.nickname"
+            placeholder="e.g. NightOwl"
+            minlength="2"
+            maxlength="24"
+            required
+            autocomplete="nickname"
+          />
+        }
+        @if (state.authMode !== "guest") {
+          <label for="handle">Username</label
+          ><input
+            id="handle"
+            name="handle"
+            [(ngModel)]="state.handle"
+            placeholder="Your unique username"
+            minlength="3"
+            maxlength="24"
+            required
+            autocomplete="username"
+          /><label for="password">Password</label
+          ><input
+            id="password"
+            name="password"
+            [(ngModel)]="state.password"
+            type="password"
+            placeholder="At least 10 characters"
+            minlength="10"
+            maxlength="128"
+            required
+            [attr.autocomplete]="
+              state.authMode === 'register' ? 'new-password' : 'current-password'
+            "
+          />
+        }
+        @if (state.error) {
+          <div class="error" role="alert">{{ state.error }}</div>
+        }
+        <button class="primary full" type="submit" [disabled]="state.busy">
+          {{
+            state.busy
+              ? "Opening the door…"
+              : state.authMode === "guest"
+                ? "Join the
+          conversation"
+                : state.authMode === "login"
+                  ? "Sign in"
+                  : "Create account"
+          }}
+        </button>
+      </form>
+      <div class="entry-foot">
+        Be kind. Respect boundaries. Keep personal details private.
+      </div>
+      @if (state.authMode === "guest") {
+        <p class="small">
+          Guest access stays on this browser for 7 days. Register to sign in again from
+          another device.
+        </p>
+      }
+    </section>
+  </div>
+  <footer class="entry-footer">
+    <span>Circle · Independent community chat</span
+    ><span>Made for conversations that matter.</span>
+  </footer>
+</main>

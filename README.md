@@ -102,7 +102,9 @@ npm test
 
 The integration suite exercises real sockets and database operations: two-user delivery, persisted history, registration, private-room isolation, upload access, removal/ban rules, blocking, random matching, whiteboard persistence and admin-only reports. It creates a uniquely named database and drops only that test database afterward.
 
-**Verification in the generation environment:** Angular production compilation passed. Database-free security tests are recorded in `VERIFICATION.md`. The database integration suite could not start because this environment denied MongoDB a filesystem operation. Docker was not available here. Browser UI verification was blocked by the browser's localhost policy. Do not interpret the included integration suite as a passing integration result. Voice/video calls, device permissions and cross-network connectivity still need testing on your deployment.
+**Latest local verification:** production compilation, all 14 server tests, and
+two browser workflow tests passed after the component refactor. See
+[VERIFICATION.md](VERIFICATION.md) for scope and remaining checks.
 
 ## Deployment
 
@@ -130,20 +132,14 @@ This release is designed for **one Node.js instance**. Presence, random matching
 - Whiteboard history is bounded to the latest 500 strokes. The room directory and member lists are bounded to 200 records; the inbox lists the latest 100 conversations. Add pagination for larger communities.
 - No production traffic, load or external-network call tests have been performed.
 
-## Project map
+## Architecture and development
 
-```text
-client/src/main.ts         Angular state and workflows
-client/src/app.html        Angular templates
-client/src/styles.css      Responsive styling
-server/src/app.js         HTTP endpoints and access control
-server/src/realtime.js    Socket.IO chat, matching, activities and calls
-server/src/models.js      MongoDB schemas and indexes
-server/src/auth.js        Password hashing and opaque sessions
-server/src/access.js      Shared authorization helpers
-server/src/seed.js        Empty starter rooms
-server/test/              Security and integration tests
-compose.yaml             App + persistent MongoDB + upload volumes
-```
+The frontend uses standalone feature components and injectable services. The
+backend uses feature routers, shared middleware, individual database models and
+separate realtime event modules.
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the directory map, dependency rules,
+adding features, reusing this structure, and test commands.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for Render and Atlas configuration.
 
 Reference reviewed: https://y99.in/ and its public guest-entry screen, 29 September 2026. This app uses original branding and UI text.
