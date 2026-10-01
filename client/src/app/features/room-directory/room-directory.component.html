@@ -8,6 +8,20 @@
       </div>
       <button class="primary" (click)="state.modal = 'create'">+ Create a room</button>
     </div>
+    <section class="random-card">
+      <div class="random-symbol">⤨</div>
+      <div>
+        <h2>Leave a little room for surprise.</h2>
+        <p>One person. One conversation. See where it goes.</p>
+      </div>
+      <button
+        class="outline"
+        (click)="state.run(rooms.random())"
+        [disabled]="!state.connected"
+      >
+        Meet someone new
+      </button>
+    </section>
     <div class="discovery-tools">
       <label class="search"
         ><span>⌕</span
@@ -58,20 +72,6 @@
         </div>
       }
     </div>
-    <section class="random-card">
-      <div class="random-symbol">⤨</div>
-      <div>
-        <h2>Leave a little room for surprise.</h2>
-        <p>One person. One conversation. See where it goes.</p>
-      </div>
-      <button
-        class="outline"
-        (click)="state.run(rooms.random())"
-        [disabled]="!state.connected"
-      >
-        Meet someone new
-      </button>
-    </section>
     <div class="subtle-footer">
       No fake online counts. No bot conversations. Just the people who join.
     </div>

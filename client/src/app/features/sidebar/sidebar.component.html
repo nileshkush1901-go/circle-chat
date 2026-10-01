@@ -1,5 +1,24 @@
 @if (state.me) {
-  <aside class="sidebar" [class.mobile-open]="state.mobileMenu">
+  @if (state.mobileMenu) {
+    <button
+      class="navigation-backdrop"
+      aria-label="Close navigation"
+      (click)="state.mobileMenu = false"
+    ></button>
+  }
+  <aside
+    id="main-navigation"
+    class="sidebar"
+    [class.mobile-open]="state.mobileMenu"
+    (keydown.escape)="state.mobileMenu = false"
+  >
+    <button
+      class="icon-button mobile-toggle navigation-close"
+      aria-label="Close navigation"
+      (click)="state.mobileMenu = false"
+    >
+      ×
+    </button>
     <a href="/" class="brand"
       ><span class="brand-mark">c</span>circle<span class="brand-dot">.</span></a
     >

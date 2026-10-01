@@ -193,7 +193,7 @@
   background: var(--accent-soft);
   border: 1px solid #e5dffb;
   border-radius: 13px;
-  margin-top: 28px;
+  margin: 0 0 28px;
 }
 .random-symbol {
   font-size: 2rem;

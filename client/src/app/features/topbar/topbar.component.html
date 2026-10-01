@@ -4,6 +4,8 @@
       <button
         class="icon-button mobile-toggle"
         aria-label="Toggle navigation"
+        aria-controls="main-navigation"
+        [attr.aria-expanded]="state.mobileMenu"
         (click)="state.mobileMenu = !state.mobileMenu"
       >
         ☰</button

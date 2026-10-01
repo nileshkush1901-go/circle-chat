@@ -17,3 +17,6 @@ server/.local-mongodb/
 
 test-results/
 playwright-report/
+
+# Local development database and launcher
+.local/
